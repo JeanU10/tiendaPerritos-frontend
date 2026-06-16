@@ -2,7 +2,7 @@
  * Frontend simple para CRUD de productos de la tienda de perritos.
  */
 
-// Determinar la URL base de la API según el host donde se esté ejecutando el frontend uwu
+// Determinar la URL base de la API según el host donde se esté ejecutando el frontend
 // frontend/app.js
 
 const API_BASE = "/api/productos";
