@@ -5,9 +5,11 @@ on:
     branches: [ "main" ]
     paths:
       - 'frontend/**'
+      - '.aws/task-definition.json'
+      - '.github/workflows/frontend-deploy.yml'
 
 env:
-  AWS_REGION: ${{ secrets.AWS_REGION }}
+  AWS_REGION: us-east-1
   ECR_REPOSITORY: tienda-frontend
   ECS_SERVICE: tienda-frontend-service
   ECS_CLUSTER: tienda-perritos-cluster
@@ -18,7 +20,6 @@ jobs:
   deploy:
     name: Deploy to Amazon ECS
     runs-on: ubuntu-latest
-    environment: production
 
     steps:
       - name: Checkout Code
