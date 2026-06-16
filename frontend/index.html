@@ -2,152 +2,422 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Tienda de Alimentos para Perritos &#128054;</title>
+  <title>Tienda de Alimentos para Perritos 🐾</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    :root {
+      --primary: #f97316;
+      --primary-hover: #ea580c;
+      --primary-glow: rgba(249, 115, 22, 0.35);
+      --bg: #0b0f19;
+      --card-bg: rgba(17, 24, 39, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --input-bg: #1f2937;
+      --input-border: #374151;
+      --danger: #ef4444;
+      --danger-hover: #dc2626;
+      --danger-glow: rgba(239, 68, 68, 0.25);
+      --success: #10b981;
+      --success-glow: rgba(16, 185, 129, 0.25);
+      --secondary: #4b5563;
+      --secondary-hover: #374151;
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      background: #f5f5f5;
     }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0b0f19 80%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+    }
+
     header {
-      background: #3b82f6;
-      color: white;
-      padding: 16px;
       text-align: center;
+      padding: 40px 20px 20px 20px;
+      position: relative;
     }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      border-radius: 2px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 0 20px var(--primary-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
     main {
-      max-width: 1000px;
-      margin: 20px auto;
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      max-width: 1300px;
+      width: 100%;
+      margin: 30px auto;
+      padding: 0 20px;
+      flex-grow: 1;
     }
-    h1, h2 {
-      margin-top: 0;
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 30px;
+      align-items: start;
     }
+
+    @media (max-width: 968px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    section {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    section:hover {
+      box-shadow: 0 15px 35px rgba(249, 115, 22, 0.05);
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 10px;
+    }
+
     .actions {
-      margin-bottom: 16px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 10px;
     }
+
     button {
-      padding: 8px 16px;
-      margin-right: 8px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 12px 24px;
       border: none;
-      border-radius: 4px;
+      border-radius: 8px;
       cursor: pointer;
-      background: #3b82f6;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
       color: white;
+      background: linear-gradient(135deg, var(--primary) 0%, #f97316 100%);
+      box-shadow: 0 4px 12px var(--primary-glow);
     }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--primary-glow);
+      filter: brightness(1.1);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
     button.secondary {
-      background: #6b7280;
+      background: linear-gradient(135deg, var(--secondary) 0%, #374151 100%);
+      box-shadow: none;
     }
+
+    button.secondary:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
     button.danger {
-      background: #ef4444;
+      background: linear-gradient(135deg, var(--danger) 0%, #b91c1c 100%);
+      box-shadow: 0 4px 12px var(--danger-glow);
     }
+
+    button.danger:hover {
+      box-shadow: 0 6px 20px var(--danger-glow);
+    }
+
+    /* Table styles */
+    .table-container {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 16px;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
+      background: rgba(17, 24, 39, 0.4);
       text-align: left;
     }
+
+    th, td {
+      padding: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
     th {
-      background: #e5e7eb;
+      background: rgba(31, 41, 55, 0.8);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
-    tr:nth-child(even) {
-      background: #f9fafb;
+
+    td {
+      font-size: 0.95rem;
+      color: var(--text);
     }
+
+    tr {
+      transition: background 0.2s ease;
+    }
+
+    tr:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Form Styles */
     .form-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 10px;
-      margin-top: 16px;
+      grid-template-columns: 1fr;
+      gap: 20px;
     }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
     label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 4px;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 6px;
-      border-radius: 4px;
-      border: 1px solid #d1d5db;
-      box-sizing: border-box;
-    }
-    .status {
-      margin-top: 10px;
       font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-muted);
     }
+
+    input, textarea {
+      font-family: inherit;
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 8px;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      color: white;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+      background: rgba(31, 41, 55, 0.6);
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    /* Actions in forms */
+    .form-actions {
+      margin-top: 25px;
+      display: flex;
+      gap: 10px;
+    }
+
+    /* Status Notification */
+    .status {
+      margin-top: 20px;
+      padding: 14px 18px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: none; /* JS will show/hide or set content */
+    }
+
+    .status:not(:empty) {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
     .status.ok {
-      color: #16a34a;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--success);
+      color: #34d399;
+      box-shadow: 0 4px 12px var(--success-glow);
     }
+
     .status.error {
-      color: #dc2626;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid var(--danger);
+      color: #f87171;
+      box-shadow: 0 4px 12px var(--danger-glow);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Action buttons in rows */
+    .btn-editar, .btn-eliminar {
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      border-radius: 6px;
+      box-shadow: none;
+    }
+
+    .btn-editar {
+      background: rgba(249, 115, 22, 0.15);
+      border: 1px solid var(--primary);
+      color: #fdba74;
+    }
+    .btn-editar:hover {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 10px var(--primary-glow);
+    }
+
+    .btn-eliminar {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid var(--danger);
+      color: #fca5a5;
+    }
+    .btn-eliminar:hover {
+      background: var(--danger);
+      color: white;
+      box-shadow: 0 4px 10px var(--danger-glow);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Tienda de Alimentos para Perritos &#128054;</h1>
+    <h1>Tienda de Alimentos para Perritos 🐾</h1>
     <p>Gestión CRUD de productos en contenedores Docker (Frontend + Backend + MySQL)</p>
   </header>
-  <main>
-    <section>
-      <h2>Productos</h2>
-      <div class="actions">
-        <button id="btnCargar">Cargar Productos</button>
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody id="tbodyProductos">
-          <!-- Aqu�� se insertan filas dinamicamente -->
-        </tbody>
-      </table>
-    </section>
 
-    <section>
-      <h2 id="formTitle">Nuevo producto</h2>
-      <div class="form-grid">
-        <div>
-          <label for="nombre">Nombre</label>
-          <input type="text" id="nombre" placeholder="Ej: Alimento Premium Cachorro" />
+  <main>
+    <div class="dashboard-grid">
+      <section>
+        <h2>🐶 Alimentos Registrados</h2>
+        <div class="actions">
+          <button id="btnCargar">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+            Cargar Productos
+          </button>
         </div>
-        <div>
-          <label for="descripcion">Descripción</label>
-          <textarea id="descripcion" rows="2" placeholder="Ej: Sabor pollo, razas pequeñas"></textarea>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyProductos">
+              <!-- Aquí se insertan filas dinámicamente -->
+            </tbody>
+          </table>
         </div>
-        <div>
-          <label for="precio">Precio</label>
-          <input type="number" id="precio" step="0.01" min="0" placeholder="Ej: 19990" />
+      </section>
+
+      <section>
+        <h2 id="formTitle">📝 Nuevo producto</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="nombre">Nombre del Producto</label>
+            <input type="text" id="nombre" placeholder="Ej: Alimento Premium Cachorro" />
+          </div>
+          <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" rows="3" placeholder="Ej: Sabor pollo, razas pequeñas, bolsa 15kg"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="precio">Precio ($)</label>
+            <input type="number" id="precio" step="0.01" min="0" placeholder="Ej: 19990" />
+          </div>
+          <div class="form-group">
+            <label for="stock">Stock Disponible</label>
+            <input type="number" id="stock" min="0" placeholder="Ej: 10" />
+          </div>
         </div>
-        <div>
-          <label for="stock">Stock</label>
-          <input type="number" id="stock" min="0" placeholder="Ej: 10" />
+        <div class="form-actions">
+          <button id="btnGuardar">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+            Guardar
+          </button>
+          <button id="btnCancelar" class="secondary">
+            Cancelar
+          </button>
         </div>
-      </div>
-      <div class="actions" style="margin-top: 12px;">
-        <button id="btnGuardar">Guardar</button>
-        <button id="btnCancelar" class="secondary">Cancelar</button>
-      </div>
-      <div id="status" class="status"></div>
-    </section>
+        <div id="status" class="status"></div>
+      </section>
+    </div>
   </main>
- 
+
+  <footer>
+    <p>© 2026 Tienda de Alimentos para Perritos. Desarrollado con Docker, ECS Fargate y Nginx.</p>
+  </footer>
+
   <script src="app.js"></script>
 </body>
 </html>
