@@ -7,6 +7,7 @@ on:
       - 'frontend/**'
       - '.aws/task-definition.json'
       - '.github/workflows/frontend-deploy.yml'
+      - 'README.md'
 
 env:
   AWS_REGION: us-east-1
